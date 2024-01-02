@@ -13,7 +13,8 @@ export default defineEventHandler(async (event) => {
   if (!methodsToProtect.includes(method)) { return }
 
   const secret = getCookie(event, csrfConfig.cookieKey!) ?? ''
-  const token = getHeader(event, 'csrf-token') ?? ''
+  const formToken = event.node.req[Symbol.for('h3ParsedBody')]['csrf-token'];
+  const token = getHeader(event, 'csrf-token') ?? formToken ?? '';
   // verify the incoming csrf token
   const url = event.node.req.url ?? ''
   const excluded = excludedUrls.some(el => Array.isArray(el)
