@@ -70,6 +70,16 @@ const { csrf } = useCsrf()
 console.log(csrf) // something like: mo4+MrFaeXP7fhAie0o2qw==:tLUaqtHW6evx/coGQVAhtGAR+v6cxgFtrqmkOsuAMag8PHRnMwpbGGUO0TPJjL+4
 ```
 
+### Form requests
+If you need to use a standard HTML form submission that does not rely on `fetch` or other JavaScript-based request, you can use the `useCsrf` composable to get the CSRF token value and add the token to a hidden form input which will be read by the middleware on submit.
+
+```html
+<form action="/form" method="POST">
+  <input type="hidden" name="csrf-token" :value="csrf" />
+  <button type="submit">Submit</button>
+</form>
+```
+
 ## Credits
 
 - inspired by [tiny-csrf](https://github.com/valexandersaulys/tiny-csrf) and [expressjs/csurf](https://github.com/expressjs/csurf)
