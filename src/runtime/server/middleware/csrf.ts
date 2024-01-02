@@ -1,6 +1,6 @@
 
 import * as csrf from 'uncsrf'
-import { defineEventHandler, getCookie, getHeader, createError } from 'h3'
+import { defineEventHandler, getCookie, getHeader, createError, readBody } from 'h3'
 import { useRuntimeConfig } from '#imports'
 import { useSecretKey } from '../helpers'
 
