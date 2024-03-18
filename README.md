@@ -43,7 +43,7 @@ The only thing you need to do to use the module in the default configuration is 
     encryptSecret: /** a 32 bits secret */, // only for non serverless runtime, random bytes by default
     encryptAlgorithm: 'aes-256-cbc', // by default 'aes-256-cbc' (node), 'AES-CBC' (serverless)
     addCsrfTokenToEventCtx: true // default false, to run useCsrfFetch on server set it to true
-  } 
+  }
 }
 ```
 
@@ -70,8 +70,14 @@ const { csrf } = useCsrf()
 console.log(csrf) // something like: mo4+MrFaeXP7fhAie0o2qw==:tLUaqtHW6evx/coGQVAhtGAR+v6cxgFtrqmkOsuAMag8PHRnMwpbGGUO0TPJjL+4
 ```
 
-### Form requests
-If you need to use a standard HTML form submission that does not rely on `fetch` or other JavaScript-based request, you can use the `useCsrf` composable to get the CSRF token value and add the token to a hidden form input which will be read by the middleware on submit.
+### Standard HTML Form requests
+If you want to use a standard form submit as a fallback for situations where Javascript isn't avaiable, you can use the `useCsrf` composable to get the CSRF token value and add the token to a hidden form input which will be read by the middleware on submit.
+
+Note: This is less secure than inserting the CSRF token in a custom HTTP request header.
+
+```javascript
+  const { csrf } = useCsrf();
+```
 
 ```html
 <form action="/form" method="POST">
